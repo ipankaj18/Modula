@@ -1,8 +1,0 @@
-auth:
-  directories:
-    - services/auth
-    - shared/security
-
-trading:
-  directories:
-    - engine/trading

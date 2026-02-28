@@ -1,0 +1,30 @@
+{
+  "name": "modula",
+  "version": "1.0.0",
+  "description": "Modula CLI wrapper around gitnexus",
+  "bin": {
+    "modula": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts"
+  },
+  "dependencies": {
+    "gitnexus": "^1.3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipankaj18/Modula.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ipankaj18/Modula/issues"
+  },
+  "homepage": "https://github.com/ipankaj18/Modula#readme",
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "typescript": "^5.9.3"
+  }
+}

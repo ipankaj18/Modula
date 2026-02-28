@@ -1,4 +1,0 @@
-PyGithub
-openai
-pyyaml
-GitPython
