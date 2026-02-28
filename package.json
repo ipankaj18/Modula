@@ -1,5 +1,5 @@
 {
-  "name": "modula",
+  "name": "@pankajlabs/modula",
   "version": "1.0.2",
   "description": "Modula CLI wrapper around gitnexus",
   "bin": {
