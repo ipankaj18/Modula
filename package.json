@@ -1,6 +1,6 @@
 {
   "name": "@pankajlabs/modula",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Modula CLI wrapper around gitnexus",
   "bin": {
     "modula": "dist/cli.js"
