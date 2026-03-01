@@ -14,12 +14,23 @@ program
   .version("1.0.0");
 
 program
-  .command("analyze")
-  .description("Run analysis via gitnexus")
-  .argument("[args...]", "Arguments to pass to gitnexus")
-  .action(async (args) => {
-    const config = await loadConfig();
-    await loadPlugins(config.plugins);
+  .command("analyze [args...]")
+  .allowUnknownOption(true)
+  .action((args) => {
+    analyzeCommand(args);
+  });
+
+program
+  .command("clean [args...]")
+  .allowUnknownOption(true)
+  .action((args) => {
+    analyzeCommand(args);
+  });
+
+program
+  .command("query [args...]")
+  .allowUnknownOption(true)
+  .action((args) => {
     analyzeCommand(args);
   });
 
