@@ -34,14 +34,14 @@ jobs:
           applypilot run
 
       - name: Save cache
-        if: !cancelled()
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: /root/.applypilot
           key: applypilot-state-${{ github.run_id }}
 
       - name: Upload .applypilot backup
-        if: !cancelled()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-data
@@ -49,7 +49,7 @@ jobs:
           retention-days: 30
 
       - name: Upload dashboard
-        if: !cancelled()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-dashboard
