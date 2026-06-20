@@ -15,6 +15,7 @@ jobs:
       LLM_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       LLM_MODEL: deepseek/deepseek-chat-v3
       LLM_URL: https://openrouter.ai/api/v1
+      HOME: /root
       
     steps:
       - name: PreChecks
