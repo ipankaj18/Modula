@@ -11,7 +11,11 @@ jobs:
 
     container:
       image: ipankaj18/applypilot-p:latest
-
+    env:
+      LLM_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      LLM_MODEL: deepseek/deepseek-chat-v3
+      LLM_URL: https://openrouter.ai/api/v1
+      
     steps:
       - name: PreChecks
         run: |
@@ -34,8 +38,17 @@ jobs:
           restore-keys: |
             applypilot-state
 
-      - name: Create directory if missing
-        run: mkdir -p /root/.applypilot
+      - name: Directory content check
+        run: |
+          echo "Content of tailored resume"
+          ls -l /root/.applypilot/tailored_resumes || true
+
+          echo "Content of Cover letters"
+          ls -l /root/.applypilot/cover_letters || true
+
+      - name: Doctor
+        run: |
+          applypilot doctor      
 
       - name: PreConfigurations 
         continue-on-error: true
@@ -45,10 +58,6 @@ jobs:
 
       - name: Run ApplyPilot
         timeout-minutes: 10
-        env:
-          LLM_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          LLM_MODEL: deepseek/deepseek-chat-v3
-          LLM_URL: https://openrouter.ai/api/v1
         run: |
           applypilot run
 
