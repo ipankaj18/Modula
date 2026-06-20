@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: pankajkumar/applypilot:latest
+      image: ipankaj18/applypilot:latest
 
     steps:
       - name: Restore .applypilot cache
