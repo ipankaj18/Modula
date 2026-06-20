@@ -25,6 +25,7 @@ jobs:
         run: mkdir -p /root/.applypilot
 
       - name: Run ApplyPilot
+        timeout-minutes: 10
         env:
           LLM_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           LLM_MODEL: deepseek/deepseek-chat-v3
@@ -33,14 +34,14 @@ jobs:
           applypilot run
 
       - name: Save cache
-        if: always()
+        if: !cancelled()
         uses: actions/cache/save@v4
         with:
           path: /root/.applypilot
           key: applypilot-state-${{ github.run_id }}
 
       - name: Upload .applypilot backup
-        if: always()
+        if: !cancelled()
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-data
@@ -48,7 +49,7 @@ jobs:
           retention-days: 30
 
       - name: Upload dashboard
-        if: always()
+        if: !cancelled()
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-dashboard
