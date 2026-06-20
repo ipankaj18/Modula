@@ -22,6 +22,8 @@ jobs:
           echo "Current directory:"
           pwd
 
+          echo "HOME=$HOME"
+
           echo "whoami:"
           whoami
       
