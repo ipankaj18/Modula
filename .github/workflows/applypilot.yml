@@ -46,11 +46,16 @@ jobs:
 
       - name: Directory content check
         run: |
+
+          echo ""
+          echo "Contents of /root/.applypilot:"
+          ls -lah /root/.applypilot || true
+          
           echo "Content of tailored resume"
-          ls -l /root/.applypilot/tailored_resumes || true
+          ls -lah /root/.applypilot/tailored_resumes || true
 
           echo "Content of Cover letters"
-          ls -l /root/.applypilot/cover_letters || true
+          ls -lah /root/.applypilot/cover_letters || true
 
       - name: Doctor
         run: |
@@ -74,18 +79,28 @@ jobs:
           path: /root/.applypilot
           key: applypilot-state-${{ github.run_id }}
 
-      - name: Upload .applypilot backup
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: applypilot-data
-          path: /root/.applypilot
-          retention-days: 30
-
       - name: Upload dashboard
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-dashboard
           path: /root/.applypilot/dashboard.html
+          retention-days: 30
+
+      - name: Upload Resume & Cover letter
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: applypilot-resumes-cover
+          path: |
+            /root/.applypilot/tailored_resumes
+            /root/.applypilot/cover_letters
+          retention-days: 30
+
+      - name: Upload .applypilot backup
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: applypilot-data
+          path: /root/.applypilot
           retention-days: 30
