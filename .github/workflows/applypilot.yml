@@ -13,6 +13,19 @@ jobs:
       image: ipankaj18/applypilot-p:latest
 
     steps:
+      - name: PreChecks
+        run: |
+          echo "Current directory:"
+          pwd
+      
+          echo ""
+          echo "Contents of /root/.applypilot:"
+          ls -lah /root/.applypilot || true
+      
+          echo ""
+          echo "Contents of searches.yaml:"
+          cat /root/.applypilot/searches.yaml || true
+    
       - name: Restore .applypilot cache
         uses: actions/cache/restore@v4
         with:
@@ -23,6 +36,12 @@ jobs:
 
       - name: Create directory if missing
         run: mkdir -p /root/.applypilot
+
+      - name: PreConfigurations 
+        continue-on-error: true
+        run: |
+            playwright install-deps
+            playwright install
 
       - name: Run ApplyPilot
         timeout-minutes: 10
