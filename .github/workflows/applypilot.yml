@@ -1,0 +1,54 @@
+name: ApplyPilot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  applypilot:
+    runs-on: ubuntu-latest
+
+    container:
+      image: pankajkumar/applypilot:latest
+
+    steps:
+      - name: Restore .applypilot cache
+        uses: actions/cache/restore@v4
+        with:
+          path: /root/.applypilot
+          key: applypilot-state
+          restore-keys: |
+            applypilot-state
+
+      - name: Create directory if missing
+        run: mkdir -p /root/.applypilot
+
+      - name: Run ApplyPilot
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          applypilot run
+
+      - name: Save cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: /root/.applypilot
+          key: applypilot-state-${{ github.run_id }}
+
+      - name: Upload .applypilot backup
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: applypilot-data
+          path: /root/.applypilot
+          retention-days: 30
+
+      - name: Upload dashboard
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: applypilot-dashboard
+          path: /root/.applypilot/dashboard.html
+          retention-days: 30
