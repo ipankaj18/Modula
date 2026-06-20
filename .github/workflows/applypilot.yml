@@ -26,7 +26,9 @@ jobs:
 
       - name: Run ApplyPilot
         env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          LLM_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          LLM_MODEL: deepseek/deepseek-chat-v3
+          LLM_URL: https://openrouter.ai/api/v1
         run: |
           applypilot run
 
