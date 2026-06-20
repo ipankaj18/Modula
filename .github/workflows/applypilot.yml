@@ -21,6 +21,9 @@ jobs:
         run: |
           echo "Current directory:"
           pwd
+
+          echo "whoami:"
+          whoami
       
           echo ""
           echo "Contents of /root/.applypilot:"
