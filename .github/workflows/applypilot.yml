@@ -103,6 +103,22 @@ jobs:
         run: |
           applypilot run pdf
 
+      - name: Stats and Dashboard generation
+        if: always()
+        timeout-minutes: 2
+        run: |
+          echo "Generating applypilot status"
+          applypilot status
+          echo "Generating applypilot dashboard"
+          applypilot dashboard
+
+      - name: Check runner filesystem
+        if: always()
+        run: |
+          pwd
+          ls -lah /root
+          ls -lah /root/.applypilot || true
+
       - name: Save cache
         if: always()
         uses: actions/cache/save@v4
@@ -133,5 +149,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-data
-          path: /root/.applypilot
+          path: |
+            /root/.applypilot/
+            .applypilot/
           retention-days: 30
