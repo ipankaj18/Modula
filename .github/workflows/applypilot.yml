@@ -2,6 +2,11 @@ name: ApplyPilot
 
 on:
   workflow_dispatch:
+    inputs:
+      use_cache:
+        description: "Restore ApplyPilot cache"
+        required: false
+        default: "true"
   schedule:
     - cron: "0 */6 * * *"
 
@@ -35,8 +40,9 @@ jobs:
           echo ""
           echo "Contents of searches.yaml:"
           cat /root/.applypilot/searches.yaml || true
-    
+
       - name: Restore .applypilot cache
+        if: github.event.inputs.use_cache == 'true'
         uses: actions/cache/restore@v4
         with:
           path: /root/.applypilot
