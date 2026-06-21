@@ -109,12 +109,12 @@ jobs:
           ls -lah /root
           ls -lah /root/.applypilot || true
 
-      # - name: Save cache
-      #   if: always()
-      #   uses: actions/cache/save@v4
-      #   with:
-      #     path: /root/.applypilot
-      #     key: applypilot-state-${{ github.run_id }}
+      - name: Save cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: /root/.applypilot
+          key: applypilot-state-${{ github.run_id }}
 
       - name: Upload dashboard
         if: always()
