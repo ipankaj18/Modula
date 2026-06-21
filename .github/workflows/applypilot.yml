@@ -103,7 +103,16 @@ jobs:
         run: |
           applypilot run pdf
 
+      - name: Stats and Dashboard generation
+        timeout-minutes: 10
+        run: |
+          echo "Generating applypilot stats"
+          applypilot stats
+          echo "Generating applypilot dashboard"
+          applypilot dashboard
+
       - name: Check runner filesystem
+        if: always()
         run: |
           pwd
           ls -lah /root
