@@ -74,41 +74,47 @@ jobs:
             playwright install
       
       - name: Discover Jobs
-        timeout-minutes: 10
+        timeout-minutes: 1
         run: |
           applypilot run discover --workers 8
       
-      - name: Enrich Jobs
-        timeout-minutes: 20
-        run: |
-          applypilot run enrich --workers 8
+      # - name: Enrich Jobs
+      #   timeout-minutes: 20
+      #   run: |
+      #     applypilot run enrich --workers 8
       
-      - name: Score Jobs
-        timeout-minutes: 30
-        run: |
-          applypilot run score
+      # - name: Score Jobs
+      #   timeout-minutes: 30
+      #   run: |
+      #     applypilot run score
       
-      - name: Tailor Resumes
-        timeout-minutes: 30
-        run: |
-          applypilot run tailor
+      # - name: Tailor Resumes
+      #   timeout-minutes: 30
+      #   run: |
+      #     applypilot run tailor
       
-      - name: Generate Cover Letters
-        timeout-minutes: 30
-        run: |
-          applypilot run cover
+      # - name: Generate Cover Letters
+      #   timeout-minutes: 30
+      #   run: |
+      #     applypilot run cover
       
       - name: Generate PDFs
         timeout-minutes: 10
         run: |
           applypilot run pdf
 
-      - name: Save cache
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: /root/.applypilot
-          key: applypilot-state-${{ github.run_id }}
+      - name: Check runner filesystem
+        run: |
+          pwd
+          ls -lah /root
+          ls -lah /root/.applypilot || true
+
+      # - name: Save cache
+      #   if: always()
+      #   uses: actions/cache/save@v4
+      #   with:
+      #     path: /root/.applypilot
+      #     key: applypilot-state-${{ github.run_id }}
 
       - name: Upload dashboard
         if: always()
