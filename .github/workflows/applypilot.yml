@@ -67,11 +67,11 @@ jobs:
         run: |
           applypilot doctor      
 
-      - name: PreConfigurations 
-        continue-on-error: true
-        run: |
-            playwright install-deps
-            playwright install
+      # - name: PreConfigurations 
+      #   continue-on-error: true
+      #   run: |
+      #       playwright install-deps
+      #       playwright install
       
       - name: Discover Jobs
         timeout-minutes: 1
@@ -104,7 +104,8 @@ jobs:
           applypilot run pdf
 
       - name: Stats and Dashboard generation
-        timeout-minutes: 10
+        if: always()
+        timeout-minutes: 2
         run: |
           echo "Generating applypilot stats"
           applypilot stats
@@ -148,5 +149,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: applypilot-data
-          path: /root/.applypilot
+          path: /root/.applypilot/*
           retention-days: 30
