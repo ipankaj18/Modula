@@ -107,8 +107,8 @@ jobs:
         if: always()
         timeout-minutes: 2
         run: |
-          echo "Generating applypilot stats"
-          applypilot stats
+          echo "Generating applypilot status"
+          applypilot status
           echo "Generating applypilot dashboard"
           applypilot dashboard
 
