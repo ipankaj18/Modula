@@ -72,11 +72,36 @@ jobs:
         run: |
             playwright install-deps
             playwright install
-
-      - name: Run ApplyPilot
+      
+      - name: Discover Jobs
         timeout-minutes: 10
         run: |
-          applypilot run
+          applypilot run discover --workers 8
+      
+      - name: Enrich Jobs
+        timeout-minutes: 20
+        run: |
+          applypilot run enrich --workers 8
+      
+      - name: Score Jobs
+        timeout-minutes: 20
+        run: |
+          applypilot run score
+      
+      - name: Tailor Resumes
+        timeout-minutes: 20
+        run: |
+          applypilot run tailor
+      
+      - name: Generate Cover Letters
+        timeout-minutes: 20
+        run: |
+          applypilot run cover
+      
+      - name: Generate PDFs
+        timeout-minutes: 10
+        run: |
+          applypilot run pdf
 
       - name: Save cache
         if: always()
