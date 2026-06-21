@@ -84,17 +84,17 @@ jobs:
           applypilot run enrich --workers 8
       
       - name: Score Jobs
-        timeout-minutes: 20
+        timeout-minutes: 30
         run: |
           applypilot run score
       
       - name: Tailor Resumes
-        timeout-minutes: 20
+        timeout-minutes: 30
         run: |
           applypilot run tailor
       
       - name: Generate Cover Letters
-        timeout-minutes: 20
+        timeout-minutes: 30
         run: |
           applypilot run cover
       
