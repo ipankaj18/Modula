@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ipankaj18/applypilot-p:latest
+      image:  ${{ vars.IMAGE }}
     env:
       LLM_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       LLM_MODEL: deepseek/deepseek-chat-v3
