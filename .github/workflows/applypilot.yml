@@ -72,50 +72,50 @@ jobs:
         run: |
           applypilot doctor      
 
-      - name: PreConfigurations 
-        continue-on-error: true
-        run: |
-            playwright install-deps
-            playwright install
+      # - name: PreConfigurations 
+      #   continue-on-error: true
+      #   run: |
+      #       playwright install-deps
+      #       playwright install
       
-      - name: Discover Jobs
-        timeout-minutes: 10
-        run: |
-          applypilot run discover --workers 8
+      # - name: Discover Jobs
+      #   timeout-minutes: 10
+      #   run: |
+      #     applypilot run discover --workers 8
       
-      - name: Enrich Jobs
-        timeout-minutes: 20
-        run: |
-          applypilot run enrich --workers 8
+      # - name: Enrich Jobs
+      #   timeout-minutes: 20
+      #   run: |
+      #     applypilot run enrich --workers 8
       
-      - name: Score Jobs
-        timeout-minutes: 30
-        run: |
-          applypilot run score
+      # - name: Score Jobs
+      #   timeout-minutes: 30
+      #   run: |
+      #     applypilot run score
       
-      - name: Tailor Resumes
-        timeout-minutes: 30
-        run: |
-          applypilot run tailor
+      # - name: Tailor Resumes
+      #   timeout-minutes: 30
+      #   run: |
+      #     applypilot run tailor
       
-      - name: Generate Cover Letters
-        timeout-minutes: 30
-        run: |
-          applypilot run cover
+      # - name: Generate Cover Letters
+      #   timeout-minutes: 30
+      #   run: |
+      #     applypilot run cover
       
-      - name: Generate PDFs
-        timeout-minutes: 10
-        run: |
-          applypilot run pdf
+      # - name: Generate PDFs
+      #   timeout-minutes: 10
+      #   run: |
+      #     applypilot run pdf
 
-      - name: Stats and Dashboard generation
-        if: always()
-        timeout-minutes: 2
-        run: |
-          echo "Generating applypilot status"
-          applypilot status
-          echo "Generating applypilot dashboard"
-          applypilot dashboard
+      # - name: Stats and Dashboard generation
+      #   if: always()
+      #   timeout-minutes: 2
+      #   run: |
+      #     echo "Generating applypilot status"
+      #     applypilot status
+      #     echo "Generating applypilot dashboard"
+      #     applypilot dashboard
 
       - name: Check runner filesystem
         if: always()
