@@ -123,7 +123,16 @@ jobs:
           pwd
           ls -lah /root
           ls -lah /root/.applypilot || true
-
+          
+      - name: Send dashboard to Discord
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          curl -X POST "$DISCORD_WEBHOOK" \
+            -F "content=ApplyPilot Dashboard - Run #${{ github.run_number }}" \
+            -F "file=@/root/.applypilot/dashboard.html"
+            
       - name: Save cache
         if: always()
         uses: actions/cache/save@v4
