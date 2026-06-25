@@ -47,7 +47,7 @@ jobs:
           cat /root/.applypilot/searches.yaml || true
 
       - name: Restore .applypilot cache
-        if: github.event.inputs.use_cache == 'true'
+        if: github.event_name == 'schedule' || github.event.inputs.use_cache == 'true'
         uses: actions/cache/restore@v4
         with:
           path: /root/.applypilot
